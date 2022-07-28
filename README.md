@@ -1,6 +1,6 @@
 ## Collatz Graph
 
-Interact with a graph representing the different values of the Collatz conjecture
+Interact with a graph representing the different values of the Collatz conjecture.
 
 ## Getting Started
 
