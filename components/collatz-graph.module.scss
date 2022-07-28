@@ -1,0 +1,22 @@
+.container {
+}
+
+.input_wrapper {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	margin-bottom: 1rem;
+	label {
+		width: 55px;
+	}
+	input {
+		flex: 1;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		padding: 0.5rem;
+		font-size: 1rem;
+		&:focus {
+			outline: none;
+		}
+	}
+}
