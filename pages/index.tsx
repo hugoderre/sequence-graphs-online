@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
-import { CollatzGraph } from '../components/collatz-graph'
+import { Graph } from '../components/graph'
 
 const Home: NextPage = () => {
 	return (
@@ -12,8 +12,7 @@ const Home: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className={styles.main}>
-				<h1>Collatz Graph</h1>
-				<CollatzGraph />
+				<Graph />
 			</main>
 		</div>
 	)
