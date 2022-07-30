@@ -8,15 +8,23 @@ import {
 	Title,
 	Tooltip,
 	Legend,
+	BarElement,
+	RadialLinearScale,
+	ArcElement,
+	Filler,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Bar, Doughnut, Line, Radar } from 'react-chartjs-2';
 import styles from './collatz-graph.module.scss';
 
 ChartJS.register(
-	CategoryScale,
-	LinearScale,
+	ArcElement,
+	BarElement,
 	PointElement,
 	LineElement,
+	RadialLinearScale,
+	CategoryScale,
+	LinearScale,
+	Filler,
 	Title,
 	Tooltip,
 	Legend
@@ -31,24 +39,26 @@ export interface CollatzDataset {
 	tension: number;
 	backgroundColor: string;
 	borderColor: string;
+	fill: boolean;
 }
 
 export function CollatzGraph() {
 
-	let [offset, setOffset] = useState(1)
-	let [next, setnext] = useState(1)
+	let [offset, setOffset] = useState(5)
+	let [next, setnext] = useState(2)
 	let [steps, setSteps] = useState(50)
+	let [type, setType] = useState('line')
 
 	const handlenextOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value: number = parseInt(event.target.value)
-		if(value > 40) {
+		if (value > 40) {
 			alert('Too many next, please set it below 40')
 			return
 		}
 		setnext(value)
 	}
 
-	const labels = Array.from(Array(steps).keys());
+	const labels = Array.from(Array(steps || 0).keys());
 
 	const generateCollatzLineData: (n: number) => CollatzLineData = n => {
 		let collatzCurrentNumber = n
@@ -68,19 +78,21 @@ export function CollatzGraph() {
 		const datasets: CollatzDataset[] = [];
 
 		for (let i = 0; i < next; i++) {
-			const label = `Dataset ${i + offset}`;
+			const label = `N${i + offset}`;
 			const data = generateCollatzLineData(i + offset);
 			const radius = 0;
-			const tension = 0.4;
+			const tension = 0;
 			const backgroundColor = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.2)`;
 			const borderColor = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`;
-			datasets.push({ label, data, radius, tension, backgroundColor, borderColor });
+			const fill = false;
+			datasets.push({ label, data, radius, tension, backgroundColor, borderColor, fill });
 		}
 
 		return datasets;
 	}
 
 	const datasets = generateCollatzDatasets(offset, next);
+	console.log(datasets)
 	const totalDuration = next * 100;
 	const delayBetweenPoints = totalDuration / datasets.length;
 	const previousY = (ctx: any) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
@@ -121,38 +133,46 @@ export function CollatzGraph() {
 				display: false,
 			},
 			title: {
-				display: true,
-				text: 'Collatz Line Chart',
+				display: false,
+				text: 'Collatz Line Graph',
 			},
 		},
 		interaction: {
 			intersect: false
 		},
-		scales: {
-			y: {
-				stacked: true
-			}
-		},
 		animation,
 	};
 
 	const data = {
-		type: 'line',
 		labels,
 		datasets,
 	};
-	
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.input_wrapper}>
-				<label htmlFor="offset_value">Offset : </label>
-				<input type="number" name="offset_value" id="offset_value" value={offset} min="1" onChange={(e) => setOffset(parseInt(e.target.value))} />
+				<label htmlFor="offset-value">Offset : </label>
+				<input type="number" id="offset-value" value={offset || ''} min="1" onChange={(e) => setOffset(parseInt(e.target.value))} />
 			</div>
 			<div className={styles.input_wrapper}>
-				<label htmlFor="next_value">Next : </label>
-				<input type="number"  name="next_value" id="next_value" value={next} min="1" max="40" onChange={handlenextOnChange} />
+				<label htmlFor="next-value">Next : </label>
+				<input type="number" id="next-value" value={next || ''} min="1" max="40" onChange={handlenextOnChange} />
 			</div>
-			<Line options={options} data={data} />
+			<div className={styles.input_wrapper}>
+				<label htmlFor="steps-value">Steps : </label>
+				<input type="number" id="steps-value" value={steps || ''} min="1" onChange={(e) => setSteps(parseInt(e.target.value))} />
+			</div>
+			<div className={styles.input_wrapper}>
+				<label htmlFor="chart-type-value">Graph : </label>
+				<select id="chart-type-value" onChange={(e) => setType(e.target.value)}>
+					<option value="line">Line</option>
+					<option value="bar">Bar</option>
+					<option value="radar">Radar</option>
+				</select>
+			</div>
+			{type === 'line' && <Line key="line" options={options} data={data} />}
+			{type === 'bar' && <Bar key="bar" options={options} data={data} />}
+			{type === 'radar' && <Radar key="radar" data={data} />}
 		</div>
 	)
 }
