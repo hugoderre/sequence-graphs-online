@@ -1,6 +1,6 @@
 ## Collatz Graph
 
-Interact with a graph representing the different values of the Collatz conjecture.
+This web app allow you to configure and visualize sequence graphs like collatz, fibonacci and more.
 
 ## Getting Started
 
