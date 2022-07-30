@@ -13,7 +13,6 @@ const Home: NextPage = () => {
 		<div className={styles.container}>
 			<Head>
 				<title>Sequences Graphs</title>
-    			<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<meta name="description" content="This web app allow you to configure and visualize sequence graphs like collatz, fibonacci and more."/>
 				<link rel="icon" href="/favicon.ico"/>
