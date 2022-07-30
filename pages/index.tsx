@@ -2,9 +2,9 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import React from 'react'
-import CollatzGraph from '../components/collatz'
-import FibonacciGraph from '../components/fibonacci'
-import CollatzCompressedGraph from '../components/collatz-compressed'
+import CollatzGraph from '../components/graph/collatz'
+import FibonacciGraph from '../components/graph/fibonacci'
+import CollatzCompressedGraph from '../components/graph/collatz-compressed'
 
 const Home: NextPage = () => {
 	let [sequence, setSequence] = React.useState('collatz')

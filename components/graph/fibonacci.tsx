@@ -7,7 +7,7 @@ export default class FibonacciGraph extends Graph {
 			sequence: 'fibonacci',
 			start: 1,
 			next: 1,
-			steps: 20
+			steps: 10
 		})
 	}
 
