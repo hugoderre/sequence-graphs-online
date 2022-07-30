@@ -1,0 +1,52 @@
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+	gap: 10px;
+	padding-top: 10px;
+	margin-bottom: 80px;
+
+	& > a {
+		display: flex;
+		border-radius: 50%;
+		box-shadow: 0 5px 4px rgba(0, 0, 0, 0.5);
+		transition: 0.6s;
+		text-decoration: none;
+		width: 60px;
+		height: 60px;
+
+		@media (max-width: 500px) {
+			width: 35px;
+			height: 35px;
+		}
+
+		background-color: white;
+
+		&.github_link:hover {
+			transform: translate(0, -10%);
+			background-color: #333;
+		}
+
+		&.website_link:hover {
+			transform: translate(0, -10%);
+			background-color: #4078c0;
+		}
+
+		& > i {
+			color: black;
+			padding: 17px 16px;
+			font-size: 28px;
+
+			@media (max-width: 500px) {
+				padding: 8px 8px;
+				font-size: 20px;
+			}
+
+			&:hover {
+				transition: 0.6s;
+				color: white;
+			}
+		}
+	}
+}
