@@ -1,8 +1,8 @@
 import { LineData } from "./graph.d"
 
-const generateCollatzLineData: (n: number, labels: number[]) => LineData = (n, labels) => {
+const generateCollatzLineData: (n: number, steps: number[]) => LineData = (n, steps) => {
 	let current = n
-	return labels.map((n, k) => {
+	return steps.map((n, k) => {
 		if (k) {
 			if (current % 2 === 0) {
 				current /= 2
