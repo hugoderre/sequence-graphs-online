@@ -4,6 +4,7 @@ export default class FibonacciGraph extends Graph {
 
 	componentDidMount(): void {
 		this.setState({
+			sequence: 'fibonacci',
 			start: 1,
 			next: 1,
 			steps: 20

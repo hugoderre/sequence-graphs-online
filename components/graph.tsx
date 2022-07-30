@@ -51,6 +51,9 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 		type: 'line',
 	}
 
+	abstract getData(start: number): number[]
+	abstract getDescription(): React.ReactNode
+
 	handleNextOnChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const value: number = parseInt(event.target.value)
 		if (value > 40) {
@@ -127,11 +130,7 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 		return animation
 	}
 
-	abstract getData(start: number): number[]
-	abstract getDescription(): React.ReactNode
-
 	render() {
-		
 		const datasets = this.generateDatasets()
 
 		const options = {
@@ -150,7 +149,7 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 			},
 			// animation: this.getAnimationSettings(datasets),
 		}
-	
+
 		const data = {
 			labels: Array.from(Array(this.state.steps || 0).keys()),
 			datasets
@@ -169,14 +168,17 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 						<option value="radar">Radar</option>
 					</select>
 				</div>
-				{this.state.sequence === 'collatz' && <div><div className="input-wrapper">
-					<label htmlFor="start-value">Start : </label>
-					<input type="number" id="start-value" value={this.state.start || ''} min="1" onChange={e => this.setState({ start: parseInt(e.target.value) })} />
-				</div>
+				{
+					(this.state.sequence === 'collatz' || this.state.sequence === 'collatz-compressed') &&
+					<div><div className="input-wrapper">
+						<label htmlFor="start-value">Start : </label>
+						<input type="number" id="start-value" value={this.state.start || ''} min="1" onChange={e => this.setState({ start: parseInt(e.target.value) })} />
+					</div>
 					<div className="input-wrapper">
 						<label htmlFor="next-value">Next : </label>
 						<input type="number" id="next-value" value={this.state.next || ''} min="1" max="40" onChange={this.handleNextOnChange.bind(this)} />
-					</div></div>}
+					</div></div>
+				}
 				<div className="input-wrapper">
 					<label htmlFor="steps-value">Steps : </label>
 					<input type="number" id="steps-value" value={this.state.steps || ''} min="1" onChange={this.handleStepsOnChange.bind(this)} />

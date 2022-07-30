@@ -4,7 +4,8 @@ export default class CollatzCompressedGraph extends Graph {
 
 	componentDidMount(): void {
 		this.setState({
-			start: 5,
+			sequence: 'collatz-compressed',
+			start: 15,
 			next: 1,
 			steps: 50,
 		})
