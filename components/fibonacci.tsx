@@ -6,7 +6,7 @@ export default class FibonacciGraph extends Graph {
 		this.setState({
 			start: 1,
 			next: 1,
-			steps: 20,
+			steps: 20
 		})
 	}
 
@@ -22,5 +22,16 @@ export default class FibonacciGraph extends Graph {
 			}
 		}
 		return steps
+	}
+
+	getDescription() {
+		return (
+			<p>
+				<strong>Fibonacci sequence</strong> is a sequence of natural numbers defined in the following way:<br/>
+				F(0) = 0<br/>
+				F(1) = 1<br/>
+				F(n) = F(n-1) + F(n-2)<br/>
+			</p>
+		)
 	}
 }

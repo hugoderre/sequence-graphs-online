@@ -48,7 +48,7 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 		start: 15,
 		next: 1,
 		steps: 50,
-		type: 'line'
+		type: 'line',
 	}
 
 	handleNextOnChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -72,8 +72,6 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 			steps: value
 		})
 	}
-
-	abstract getData(start: number): number[]
 
 	generateDatasets() {
 		const datasets: GraphDataset[] = []
@@ -129,6 +127,9 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 		return animation
 	}
 
+	abstract getData(start: number): number[]
+	abstract getDescription(): React.ReactNode
+
 	render() {
 		
 		const datasets = this.generateDatasets()
@@ -157,6 +158,9 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 
 		return (
 			<div className={styles.container} >
+				<div className={styles.description}>
+					{this.getDescription()}
+				</div>
 				<div className="input-wrapper">
 					<label htmlFor="graph-type-value">Type : </label>
 					<select id="chart-type-value" onChange={e => this.setState({ type: e.target.value })}>
