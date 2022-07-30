@@ -1,4 +1,4 @@
-## Collatz Graph
+## Sequence Graphs Online
 
 This web app allow you to configure and visualize sequence graphs like collatz, fibonacci and more.
 
