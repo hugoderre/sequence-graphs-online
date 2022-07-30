@@ -15,9 +15,7 @@ import {
 } from 'chart.js'
 import { Bar, Line, Radar } from 'react-chartjs-2'
 import styles from './graph.module.scss'
-import generateCollatzLineData from './collatz'
 import { GraphDataset } from './graph.d'
-import generateFibonacciLineData from './fibonacci'
 
 ChartJS.register(
 	ArcElement,
@@ -44,34 +42,13 @@ type GraphState = {
 	type: string,
 };
 
-export class Graph extends React.Component<GraphProps, GraphState> {
+abstract class Graph extends React.Component<GraphProps, GraphState> {
 	state: GraphState = {
 		sequence: 'collatz',
 		start: 15,
 		next: 1,
 		steps: 50,
 		type: 'line'
-	}
-
-	handleSequenceOnChange(event: React.ChangeEvent<HTMLSelectElement>) {
-		let steps
-		switch (event.target.value) {
-			case 'fibonacci':
-				steps = 20
-				this.setState({
-					start: 1,
-					next: 1,
-				})
-				break
-			case 'collatz':
-			default:
-				steps = 50
-				break
-		}
-		this.setState({
-			sequence: event.target.value,
-			steps,
-		})
 	}
 
 	handleNextOnChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -85,7 +62,20 @@ export class Graph extends React.Component<GraphProps, GraphState> {
 		})
 	}
 
-	generateDatasets(steps: number[]) {
+	handleStepsOnChange(event: React.ChangeEvent<HTMLInputElement>) {
+		const value: number = parseInt(event.target.value)
+		if (value > 2000) {
+			alert('Too many steps, please set it below 2000')
+			return
+		}
+		this.setState({
+			steps: value
+		})
+	}
+
+	abstract getData(start: number): number[]
+
+	generateDatasets() {
 		const datasets: GraphDataset[] = []
 
 		for (let i = 0; i < this.state.next; i++) {
@@ -94,18 +84,8 @@ export class Graph extends React.Component<GraphProps, GraphState> {
 			const tension = 0
 			const backgroundColor = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.2)`
 			const borderColor = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`
-			const fill = false
-
-			let data
-			switch (this.state.sequence) {
-				case 'fibonacci':
-					data = generateFibonacciLineData(steps)
-					break
-				case 'collatz':
-				default:
-					data = generateCollatzLineData(i + this.state.start, steps)
-					break
-			}
+			const fill = true
+			const data = this.getData(this.state.start + i)
 
 			datasets.push({ label, radius, tension, backgroundColor, borderColor, fill, data })
 		}
@@ -150,8 +130,8 @@ export class Graph extends React.Component<GraphProps, GraphState> {
 	}
 
 	render() {
-		const steps = Array.from(Array(this.state.steps || 0).keys())
-		const datasets = this.generateDatasets(steps)
+		
+		const datasets = this.generateDatasets()
 
 		const options = {
 			responsive: true,
@@ -167,24 +147,17 @@ export class Graph extends React.Component<GraphProps, GraphState> {
 			interaction: {
 				intersect: false
 			},
-			//animation: this.getAnimationSettings(datasets),
+			// animation: this.getAnimationSettings(datasets),
 		}
 	
 		const data = {
-			labels: steps,
+			labels: Array.from(Array(this.state.steps || 0).keys()),
 			datasets
 		}
 
 		return (
 			<div className={styles.container} >
-				<div className={styles.input_wrapper}>
-					<label htmlFor="sequence-type-value">Sequence : </label>
-					<select id="sequence-type-value" onChange={this.handleSequenceOnChange.bind(this)}>
-						<option value="collatz">Collatz</option>
-						<option value="fibonacci">Fibonacci</option>
-					</select>
-				</div>
-				<div className={styles.input_wrapper}>
+				<div className="input-wrapper">
 					<label htmlFor="graph-type-value">Type : </label>
 					<select id="chart-type-value" onChange={e => this.setState({ type: e.target.value })}>
 						<option value="line">Line</option>
@@ -192,17 +165,17 @@ export class Graph extends React.Component<GraphProps, GraphState> {
 						<option value="radar">Radar</option>
 					</select>
 				</div>
-				{this.state.sequence === 'collatz' && <div><div className={styles.input_wrapper}>
+				{this.state.sequence === 'collatz' && <div><div className="input-wrapper">
 					<label htmlFor="start-value">Start : </label>
 					<input type="number" id="start-value" value={this.state.start || ''} min="1" onChange={e => this.setState({ start: parseInt(e.target.value) })} />
 				</div>
-					<div className={styles.input_wrapper}>
+					<div className="input-wrapper">
 						<label htmlFor="next-value">Next : </label>
 						<input type="number" id="next-value" value={this.state.next || ''} min="1" max="40" onChange={this.handleNextOnChange.bind(this)} />
 					</div></div>}
-				<div className={styles.input_wrapper}>
+				<div className="input-wrapper">
 					<label htmlFor="steps-value">Steps : </label>
-					<input type="number" id="steps-value" value={this.state.steps || ''} min="1" onChange={e => this.setState({ steps: parseInt(e.target.value) })} />
+					<input type="number" id="steps-value" value={this.state.steps || ''} min="1" onChange={this.handleStepsOnChange.bind(this)} />
 				</div>
 				{this.state.type === 'line' && <Line key="line" options={options} data={data} />}
 				{this.state.type === 'bar' && <Bar key="bar" options={options} data={data} />}
@@ -211,3 +184,5 @@ export class Graph extends React.Component<GraphProps, GraphState> {
 		)
 	}
 }
+
+export default Graph
