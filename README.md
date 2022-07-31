@@ -2,6 +2,18 @@
 
 This web app allow you to configure and visualize sequence graphs like collatz, fibonacci and more.
 
+## Contribute to this project
+
+Sequence Graphs Online is an open source project. Any contribution will be treated and highly appreciated.
+
+### What can be added / enhanced ?
+
+<ul>
+  <li>Addition of new mathematical sequences.</li>
+  <li>Enhancement of the interface, both stylistically and functionally.</li>
+  <li>SEO enhancement</li>
+</ul>
+
 ## Getting Started
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
