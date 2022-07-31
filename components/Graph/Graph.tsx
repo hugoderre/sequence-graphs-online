@@ -84,8 +84,9 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 
 	generateDatasets() {
 		const datasets: GraphDataset[] = []
-		const dataLength = 1 + this.state.next // +1 for the start sequence
-
+		const next = isNaN(this.state.next) ? 0 : this.state.next
+		const dataLength = 1 + next // +1 for the start sequence
+		
 		for (let i = 0; i < dataLength; i++) {
 			const label = `N${i + this.state.start}`
 			const radius = 0
