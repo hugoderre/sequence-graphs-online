@@ -14,8 +14,8 @@ import {
 	Filler,
 } from 'chart.js'
 import { Bar, Line, Radar } from 'react-chartjs-2'
-import styles from './graph.module.scss'
-import { GraphDataset } from './graph.d'
+import styles from './Graph.module.scss'
+import { GraphDataset } from './Graph.d'
 
 ChartJS.register(
 	ArcElement,

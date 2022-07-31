@@ -1,6 +1,3 @@
-html {
-	color-scheme: dark;
-}
 html,
 body {
 	padding: 0;
@@ -8,8 +5,19 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
 		Helvetica Neue, sans-serif;
 	font-size: 18px;
+}
+
+body[data-color-scheme="dark"] {
 	color: white;
+	color-scheme: dark;
 	background: black;
+	transition: background 0.2s ease-in;
+}
+
+body[data-color-scheme="light"] {
+	color: black;
+	background: white;
+	transition: background 0.2s ease-in;
 }
 
 a {
@@ -21,15 +29,16 @@ a {
 	box-sizing: border-box;
 }
 
-// @media (prefers-color-scheme: dark) {
-// 	html {
-// 		color-scheme: dark;
-// 	}
-// 	body {
-// 		color: white;
-// 		background: black;
-// 	}
-// }
+header {
+	width: 100%;
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	h1 {
+		justify-self: center;
+	}
+}
 
 .input-wrapper {
 	display: flex;

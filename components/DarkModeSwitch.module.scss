@@ -1,0 +1,60 @@
+.container {
+	position: absolute;
+	right: 0;
+}
+
+.toggle_wrapper {
+	--darkmode-toggle-height: 2rem;
+	--darkmode-toggle-width: calc(var(--darkmode-toggle-height) * 2);
+	position: relative;
+	background: #e8eced;
+	width: var(--darkmode-toggle-width);
+	height: var(--darkmode-toggle-height);
+	border-radius: calc(var(--darkmode-toggle-height) / 2);
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	border: 1px solid #c9c9c9;
+}
+
+.toggle_checkbox {
+	opacity: 0;
+	height: var(--darkmode-toggle-height);
+	width: var(--darkmode-toggle-width);
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.toggle_circle {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: calc(var(--darkmode-toggle-width) / 2);
+	height: var(--darkmode-toggle-height);
+	width: calc(var(--darkmode-toggle-width) / 2);
+	border-radius: 50%;
+	background: #fff;
+	border: 2px solid #03adfc;
+	box-sizing: border-box;
+	box-shadow: 0 0 calc(var(--darkmode-toggle-width) / 10) #03adfc;
+	transition: 0.1s ease-in;
+}
+
+.toggle_checkbox:checked + .toggle_circle {
+	left: calc(var(--darkmode-toggle-width) / 2);
+	right: 0;
+}
+
+.icon {
+	color: black;
+	font-size: calc(var(--darkmode-toggle-height) * 0.6);
+	line-height: 0;
+
+	&.icon_sun {
+		color: orange;
+		transition: 0.1s ease-in;
+	}
+}

@@ -1,4 +1,4 @@
-import styles from "./social-media.module.scss";
+import styles from "./SocialMedia.module.scss";
 
 export default function SocialMedia() {
 	return (
