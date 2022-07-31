@@ -11,7 +11,7 @@ Sequence Graphs Online is an open source project. Any contribution will be treat
 <ul>
   <li>Addition of new mathematical sequences.</li>
   <li>Enhancement of the interface, both stylistically and functionally.</li>
-  <li>SEO enhancement</li>
+  <li>SEO improvement</li>
 </ul>
 
 ## Getting Started
