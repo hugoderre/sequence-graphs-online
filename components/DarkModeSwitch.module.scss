@@ -1,6 +1,10 @@
 .container {
 	position: absolute;
 	right: 0;
+	@media (max-width: 768px) {
+		position: relative;
+		right: unset;
+	}
 }
 
 .toggle_wrapper {
@@ -15,6 +19,9 @@
 	align-items: center;
 	justify-content: space-around;
 	border: 1px solid #c9c9c9;
+	@media (max-width: 768px) {
+		--darkmode-toggle-height: 1.5rem;
+	}
 }
 
 .toggle_checkbox {

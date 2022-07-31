@@ -39,8 +39,14 @@ header {
 	position: relative;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: 30px;
+	@media (max-width: 768px) {
+		justify-content: space-around;
+	}
 	h1 {
-		justify-self: center;
+		@media (max-width: 768px) {
+			font-size: 22px;
+		}
 	}
 }
 
