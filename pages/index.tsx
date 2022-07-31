@@ -37,7 +37,7 @@ const Home: NextPage = () => {
 					<h2>Contribute</h2>
 					<p>
 						Sequence Graphs Online is an open source project. Any contribution will be treated and highly appreciated.<br/>
-						Feel free to add another famous sequence, enhance the existing ones or makes the interface better.<br/> 
+						Feel free to add another famous sequences, enhance the existing ones or makes the interface better.<br/> 
 						This project uses Next.js framework, and the design of the code makes it easy to extend it to add new sequences.<br/> 
 						You can find the source code on <a href="https://github.com/hugoderre/sequence-graphs-online" target="_blank" rel="noopener noreferrer" className="github-link">GitHub</a>.
 					</p>
