@@ -5,13 +5,16 @@ export default class CollatzGraph extends Graph {
 	componentDidMount(): void {
 		this.setState({
 			start: 15,
-			next: 1,
+			next: 0,
 			steps: 50,
+			isStartable: true,
+			isNextable: true,
 		})
 	}
 
 	getData(start: number) {
 		let current = start
+
 		return Array.from(Array(this.state.steps || 0).keys()).map((n, k) => {
 			if (k) {
 				if (current % 2 === 0) {
@@ -20,6 +23,7 @@ export default class CollatzGraph extends Graph {
 					current = current * 3 + 1
 				}
 			}
+			
 			return current
 		})
 	}

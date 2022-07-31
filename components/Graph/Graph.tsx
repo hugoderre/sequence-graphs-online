@@ -40,13 +40,15 @@ type GraphState = {
 	next: number,
 	steps: number,
 	type: string,
+	isStartable?: boolean,
+	isNextable?: boolean,
 };
 
 abstract class Graph extends React.Component<GraphProps, GraphState> {
 	state: GraphState = {
 		sequence: 'collatz',
 		start: 15,
-		next: 1,
+		next: 0,
 		steps: 50,
 		type: 'line',
 	}
@@ -56,10 +58,12 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 
 	handleNextOnChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const value: number = parseInt(event.target.value)
+		
 		if (value > 40) {
 			alert('Too many next, please set it below 40')
 			return
 		}
+
 		this.setState({
 			next: value
 		})
@@ -67,10 +71,12 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 
 	handleStepsOnChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const value: number = parseInt(event.target.value)
+
 		if (value > 2000) {
 			alert('Too many steps, please set it below 2000')
 			return
 		}
+
 		this.setState({
 			steps: value
 		})
@@ -78,8 +84,9 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 
 	generateDatasets() {
 		const datasets: GraphDataset[] = []
+		const dataLength = 1 + this.state.next // +1 for the start sequence
 
-		for (let i = 0; i < this.state.next; i++) {
+		for (let i = 0; i < dataLength; i++) {
 			const label = `N${i + this.state.start}`
 			const radius = 0
 			const tension = 0
@@ -127,6 +134,7 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 			},
 			onProgress: function (animation: any) { }
 		}
+
 		return animation
 	}
 
@@ -168,17 +176,21 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 						<option value="radar">Radar</option>
 					</select>
 				</div>
+				<div>
 				{
-					(this.state.sequence === 'collatz' || this.state.sequence === 'collatz-compressed') &&
-					<div><div className="input-wrapper">
+					this.state.isStartable &&
+					<div className="input-wrapper">
 						<label htmlFor="start-value">Start : </label>
-						<input type="number" id="start-value" value={this.state.start || ''} min="1" onChange={e => this.setState({ start: parseInt(e.target.value) })} />
+						<input type="number" id="start-value" value={isNaN(this.state.start) ? '' : this.state.start} min="0" onChange={e => this.setState({ start: parseInt(e.target.value) })} />
 					</div>
+				}
+				{   this.state.isNextable &&
 					<div className="input-wrapper">
 						<label htmlFor="next-value">Next : </label>
-						<input type="number" id="next-value" value={this.state.next || ''} min="1" max="40" onChange={this.handleNextOnChange.bind(this)} />
-					</div></div>
+						<input type="number" id="next-value" value={isNaN(this.state.next) ? '' : this.state.next} min="0" max="40" onChange={this.handleNextOnChange.bind(this)} />
+					</div>
 				}
+				</div>
 				<div className="input-wrapper">
 					<label htmlFor="steps-value">Steps : </label>
 					<input type="number" id="steps-value" value={this.state.steps || ''} min="1" onChange={this.handleStepsOnChange.bind(this)} />

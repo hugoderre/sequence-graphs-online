@@ -6,8 +6,10 @@ export default class CollatzCompressedGraph extends Graph {
 		this.setState({
 			sequence: 'collatz-compressed',
 			start: 15,
-			next: 1,
+			next: 0,
 			steps: 50,
+			isStartable: true,
+			isNextable: true,
 		})
 	}
 
@@ -25,6 +27,7 @@ export default class CollatzCompressedGraph extends Graph {
 
 	getData(start: number) {
 		let current = start
+
 		return Array.from(Array(this.state.steps || 0).keys()).map((n, k) => {
 			if (k) {
 				if (current % 2 === 0) {
@@ -33,6 +36,7 @@ export default class CollatzCompressedGraph extends Graph {
 					current = ( current * 3 + 1 ) / 2
 				}
 			}
+			
 			return current
 		})
 	}

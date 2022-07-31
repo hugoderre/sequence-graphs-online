@@ -6,13 +6,14 @@ export default class FibonacciGraph extends Graph {
 		this.setState({
 			sequence: 'fibonacci',
 			start: 1,
-			next: 1,
-			steps: 10
+			next: 0,
+			steps: 10,
 		})
 	}
 
 	getData(start: number) {
 		let steps = Array.from(Array(this.state.steps || 0).keys())
+
 		for (let i = 0; i < steps.length; i++) {
 			if (i === 0) {
 				steps[i] = 0
@@ -22,6 +23,7 @@ export default class FibonacciGraph extends Graph {
 				steps[i] = steps[i - 1] + steps[i - 2]
 			}
 		}
+		
 		return steps
 	}
 
