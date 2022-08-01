@@ -2,9 +2,12 @@ import Graph from "./Graph"
 
 export default class FibonacciGraph extends Graph {
 
+	static graphName = "Fibonacci"
+	static graphKey = "fibonacci"
+
 	componentDidMount(): void {
 		this.setState({
-			sequence: 'fibonacci',
+			sequence: FibonacciGraph.graphKey,
 			start: 1,
 			next: 0,
 			steps: 10,

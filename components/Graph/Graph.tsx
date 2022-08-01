@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -53,8 +53,10 @@ abstract class Graph extends React.Component<GraphProps, GraphState> {
 		type: 'line',
 	}
 
+	static graphName: string
+	static graphKey: string
 	abstract getData(start: number): number[]
-	abstract getDescription(): React.ReactNode
+	abstract getDescription(): JSX.Element
 
 	handleNextOnChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const value: number = parseInt(event.target.value)

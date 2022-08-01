@@ -2,8 +2,12 @@ import Graph from "./Graph"
 
 export default class CollatzGraph extends Graph {
 
+	static graphName = "Collatz"
+	static graphKey = "collatz"
+
 	componentDidMount(): void {
 		this.setState({
+			sequence: CollatzGraph.graphKey,
 			start: 15,
 			next: 0,
 			steps: 50,

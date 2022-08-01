@@ -2,9 +2,12 @@ import Graph from "./Graph"
 
 export default class CollatzCompressedGraph extends Graph {
 
+	static graphName = "Collatz (Compressed)"
+	static graphKey = "collatz-compressed"
+
 	componentDidMount(): void {
 		this.setState({
-			sequence: 'collatz-compressed',
+			sequence: CollatzCompressedGraph.graphKey,
 			start: 15,
 			next: 0,
 			steps: 50,
