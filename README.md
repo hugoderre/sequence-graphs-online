@@ -9,7 +9,7 @@ Sequence Graphs Online is an open source project. Any contribution will be treat
 ### What can be added / enhanced ?
 
 <ul>
-  <li>Addition of new mathematical sequences.</li>
+  <li>Addition of new sequences.</li>
   <li>Enhancement of the interface, both stylistically and functionally.</li>
   <li>SEO improvement.</li>
 </ul>
