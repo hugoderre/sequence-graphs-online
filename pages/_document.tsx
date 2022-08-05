@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
 	return (
-		<Html>
+		<Html lang="en">
 			<Head>
 				<meta name="description" content="This web app allow you to configure and visualize sequence graphs like collatz, fibonacci and more." />
 				<link rel="icon" href="/favicon.ico" />
