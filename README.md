@@ -1,6 +1,7 @@
 ## Sequence Graphs Online
 
 This web app allow you to configure and visualize sequence graphs like collatz, fibonacci and more.
+https://sequence-graphs.com/
 
 ## Contribute to this project
 
